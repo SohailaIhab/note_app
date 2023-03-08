@@ -7,11 +7,15 @@ environment:
   sdk: '>=2.19.2 <3.0.0'
 
 dependencies:
+  hive:
+  hive_flutter:
   google_fonts:
   flutter:
     sdk: flutter
 
 dev_dependencies:
+  hive_generator:
+  build_runner:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
