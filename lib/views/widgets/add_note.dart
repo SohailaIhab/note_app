@@ -1,71 +1,39 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:note_app1/views/widgets/add_note_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:note_app1/cubits/add_note/add_note_cubit.dart';
+import 'package:note_app1/cubits/create_note/create_note_cubit.dart';
 
-import 'form_field.dart';
+import 'note_form.dart';
+
 class AddNote extends StatelessWidget {
   const AddNote({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 16),
-    // child: SingleChildScrollView(
-        child: AddingNoteForm(),
- //   ),
+    return  BlocProvider(
+     create: (context)=>AddNotesCubit(),
+      
+      
+      // child: SingleChildScrollView(
+          child: BlocConsumer<AddNotesCubit,AddNotesStates>(
+            builder: ( context, state) {  return
+              Padding(padding: EdgeInsets.only(left:16,right:16,
+              bottom: MediaQuery.of(context).viewInsets.bottom),
+              child:const AddingNoteForm(),);    
+           },
+
+          listener: ( context,  state) { 
+           /* if (state is Failure){
+              print("fail");
+            }*/
+    if(state is Success){ 
+      Navigator.pop(context);
+      BlocProvider.of<CreationCubits>(context).fetchState();
+         }
+           },
+          ),
+     //   ),
+      
     );
   }
 }
-
-class AddingNoteForm extends StatefulWidget {
-  const AddingNoteForm({
-    super.key,
-  });
-
-  @override
-  State<AddingNoteForm> createState() => _AddingNoteFormState();
-}
-
-class _AddingNoteFormState extends State<AddingNoteForm> {
-
-  final GlobalKey<FormState> formKey=GlobalKey(); 
-
-  String? tit,
-  subTit;
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-      child: Column(
-        children:  [
-         const SizedBox(
-            height: 26,
-          ),
-          CustomFormField(hint: "Title",
-          onSave: (value){
-            tit=value;
-          },),
-         const SizedBox(
-            height: 16,
-          ),
-           CustomFormField(hint:"Description", 
-           maxLs:5,
-           onSave: (value){
-            subTit=value;
-           },),
-        const  SizedBox(height: 40,),
-          AddNoteButton(
-            onTap: (){
-              if(formKey.currentState!.validate()){
-               formKey.currentState!.save();
-              }
-            },
-          ),
-        ],
-      ),
-    );
-  }
-}
-

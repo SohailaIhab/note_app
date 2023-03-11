@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:note_app1/views/widgets/add_note.dart';
-
 import 'package:note_app1/views/widgets/notes_view_body.dart';
 
 class NotesView extends StatelessWidget {
@@ -8,24 +7,27 @@ class NotesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      floatingActionButton: FloatingActionButton(
-       onPressed: () {
-        showModalBottomSheet(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16)),
-          context: context,
-           builder: (context){
-          return AddNote();
-        });
-       },
-       child:Icon(
-        Icons.add,
-        color: Colors.white,
-        size: 30,),
-       backgroundColor:Colors.black),
-
-      body: NotesViewsBody(),
+    return
+       Scaffold(
+        floatingActionButton: FloatingActionButton(
+         onPressed: () {
+          showModalBottomSheet(
+            isScrollControlled: true,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16)),
+            context: context,
+             builder: (context){
+            return const AddNote();
+          });
+         },
+         backgroundColor:Colors.black,
+         child: const Icon(
+          Icons.add,
+          color: Colors.white,
+          size: 30,)),
+    
+        body:const NotesViewsBody(),
+     
     );
   }
 }

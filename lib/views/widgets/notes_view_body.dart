@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:note_app1/views/widgets/note_card.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:note_app1/cubits/create_note/create_note_cubit.dart';
 import 'custom_app_bar.dart';
 import 'notes_listview.dart';
 
-class NotesViewsBody extends StatelessWidget {
+class NotesViewsBody extends StatefulWidget {
   const NotesViewsBody({super.key});
+
+  @override
+  State<NotesViewsBody> createState() => _NotesViewsBodyState();
+}
+
+class _NotesViewsBodyState extends State<NotesViewsBody> {
+  @override
+  void initState(){
+    super.initState();
+    BlocProvider.of<CreationCubits>(context).fetchState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +30,7 @@ class NotesViewsBody extends StatelessWidget {
         CustomAppBar(),
 
         SizedBox(
-          height: 30,
+          height: 20,
         ),
        Expanded(child: NotesListView(),) 
       ],), );
