@@ -1,5 +1,5 @@
 # Note App Demo
-![home screen](screens/note.png)
+![home screen](screens/home.png)
 ![adding](screens/addnote.png)
 ![listview](screens/notelistview.png)
 
