@@ -1,3 +1,3 @@
-# note_app1
+# Note App Demo
+!(screens/note.png)
 
-A new Flutter project.
