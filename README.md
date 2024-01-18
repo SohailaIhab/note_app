@@ -1,3 +1,3 @@
 # Note App Demo
-!(screens/note.png)
+![home screen](screens/note.png)
 
